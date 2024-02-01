@@ -24,7 +24,7 @@ export class Person {
     @JoinColumn( {name: 'idDocumentType'})
     documentType: DocumentType
     
-    @Column()
+    @Column({default : true})
     state: boolean
 
     @Column()
@@ -33,13 +33,6 @@ export class Person {
     @ManyToOne(() => Area, area => area.peopĺe)
     @JoinColumn({name: 'idArea' })
     area: Area
-
-    @Column()
-    idPersonPicture: number
-
-    @ManyToOne(() =>PersonPicture, personPicture => personPicture.person)
-    @JoinColumn({name: 'idPersonPicture'})
-    personPicture: PersonPicture
 
     @OneToMany(() => PersonPicture, personPicture => personPicture.person)
     personPictures: PersonPicture[];

@@ -9,7 +9,7 @@ export class PersonController {
 
   @Post()
   create(@Body() createPersonDto: CreatePersonDto) {
-    return this.personService.create(createPersonDto);
+    return this.personService.createPerson(createPersonDto);
   }
 
   @Get()
@@ -18,17 +18,18 @@ export class PersonController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.personService.findOne(+id);
+  findOne(@Param('id') id: number) {
+    return this.personService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePersonDto: UpdatePersonDto) {
-    return this.personService.update(+id, updatePersonDto);
+  update(@Param('id') id: number, @Body() updatePersonDto: UpdatePersonDto) {
+    return this.personService.update(id, updatePersonDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.personService.remove(+id);
+  remove(@Param('id') id: number) {
+    return this.personService.remove(id);
   }
 }
+

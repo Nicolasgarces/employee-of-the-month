@@ -29,7 +29,7 @@ export class VoteDescription {
     @JoinColumn({name : 'idVoted'})
     votedPerson: Person;
 
-    @Column()
+    @Column({default: true})
     state: boolean
 
 }

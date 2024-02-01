@@ -13,15 +13,12 @@ export class PersonPicture {
     @Column()
     idPerson: number
 
-    @ManyToOne(() => Person, person => person.personPicture)
+    @ManyToOne(() => Person, person => person.personPictures)
     @JoinColumn({name: 'idPerson' })
     person: Person;
 
-    @Column()
+    @Column({default: true})
     state: boolean;
-
-    @OneToMany(() => Person, person => person.personPicture)
-    people: Person;
 
 }
 

@@ -18,8 +18,8 @@ export class Vote {
     @Column()
     VoteDate: Date
 
-    @Column()
-    estado: number
+    @Column({default: true})
+    state: boolean
 
     @OneToMany(() => VoteDescription, voteDescription => voteDescription.vote)
     voteDescriptions: VoteDescription[]

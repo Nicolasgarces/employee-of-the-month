@@ -10,7 +10,7 @@ export class Area {
     @Column()
     name: string
 
-    @Column()
+    @Column({default : true})
     state: boolean
 
     @OneToMany(() => Person, person=> person.area)

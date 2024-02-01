@@ -10,7 +10,7 @@ export class DocumentType {
     @Column()
     name: string
 
-    @Column()
+    @Column({default : true})
     state: boolean
 
     @OneToMany(() => Person, person => person.documentType)
