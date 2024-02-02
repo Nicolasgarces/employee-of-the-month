@@ -9,16 +9,13 @@ export class CreatePersonDto {
     @IsString()
     @IsNotEmpty()
     identification: string
-
     
     @IsNotEmpty()
     idDocumentType: number
 
     @IsNotEmpty()
-    state: boolean
-
-    @IsNotEmpty()
     idArea: number
-    
+
+    deletedAt?: Date;
 
 }

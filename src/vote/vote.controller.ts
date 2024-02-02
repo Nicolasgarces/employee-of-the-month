@@ -18,17 +18,17 @@ export class VoteController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.voteService.findOne(+id);
+  findOne(@Param('id') id: number) {
+    return this.voteService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateVoteDto: UpdateVoteDto) {
-    return this.voteService.update(+id, updateVoteDto);
+  update(@Param('id') id: number, @Body() updateVoteDto: UpdateVoteDto) {
+    return this.voteService.update(id, updateVoteDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.voteService.remove(+id);
+  remove(@Param('id') id: number) {
+    return this.voteService.remove(id);
   }
 }

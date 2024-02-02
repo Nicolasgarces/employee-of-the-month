@@ -10,27 +10,27 @@ export class PersonService {
 
   constructor(
     @InjectRepository (Person)
-    private personRepository : Repository<Person>,
+    private PersonRepository : Repository<Person>,
   ){}
 
-  createPerson(createPersonDto: CreatePersonDto) {
-    const newPerson = this.personRepository.create(createPersonDto)
-    return this.personRepository.save(newPerson);
+  async createPerson(createPersonDto: CreatePersonDto) {
+    const newPerson = this.PersonRepository.create(createPersonDto)
+    return this.PersonRepository.save(newPerson);
   }
 
-  findAll() {
-    return `This action returns all person`;
+  async findAll() {
+    return await this.PersonRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} person`;
+  async findOne(id: number) {
+    return await this.PersonRepository.findOneBy({id});
   }
 
-  update(id: number, updatePersonDto: UpdatePersonDto) {
-    return `This action updates a #${id} person`;
+  async update(id: number, updatePersonDto: UpdatePersonDto) {
+    return await this.PersonRepository.update(id, updatePersonDto);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} person`;
+    return this.PersonRepository.softDelete(id);
   }
 }

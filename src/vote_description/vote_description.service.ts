@@ -1,26 +1,36 @@
 import { Injectable } from '@nestjs/common';
 import { CreateVoteDescriptionDto } from './dto/create-vote_description.dto';
 import { UpdateVoteDescriptionDto } from './dto/update-vote_description.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { VoteDescription } from './entities/vote_description.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class VoteDescriptionService {
-  create(createVoteDescriptionDto: CreateVoteDescriptionDto) {
-    return 'This action adds a new voteDescription';
+
+  constructor(
+    @InjectRepository(VoteDescription)
+    private VoteDescriptionRepository : Repository<VoteDescription>
+  ){}
+
+  async create(createVoteDescriptionDto: CreateVoteDescriptionDto) {
+    const newVoteDescription = this.VoteDescriptionRepository.create(createVoteDescriptionDto)
+    return await this.VoteDescriptionRepository.save(newVoteDescription);
   }
 
-  findAll() {
-    return `This action returns all voteDescription`;
+  async findAll() {
+    return await this.VoteDescriptionRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} voteDescription`;
+  async findOne(id: number) {
+    return await this.VoteDescriptionRepository.findOneBy({id});
   }
 
-  update(id: number, updateVoteDescriptionDto: UpdateVoteDescriptionDto) {
-    return `This action updates a #${id} voteDescription`;
+  async update(id: number, updateVoteDescriptionDto: UpdateVoteDescriptionDto) {
+    return await this.VoteDescriptionRepository.update(id ,updateVoteDescriptionDto);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} voteDescription`;
+    return this.VoteDescriptionRepository.softDelete(id);
   }
 }

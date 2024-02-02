@@ -1,11 +1,16 @@
 import { Person } from "src/person/entities/person.entity";
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Role } from "src/role/entities/rol.entity";
+import { Column, DeleteDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class User {
 
     @PrimaryGeneratedColumn()
     id: number
+
+    @Column({type: 'datetime', default: () =>
+    'CURRENT_TIMESTAMP'})
+    createdAt: Date;
 
     @Column()
     idPerson: number
@@ -23,4 +28,13 @@ export class User {
     @Column({default: true})
     state: string
 
+    @DeleteDateColumn()
+    deletedAt: Date;
+
+    @Column()
+    idRole: number
+
+    @ManyToOne(()=> Role, rol => rol.user)
+    @JoinColumn({name: 'idRole'})
+    roles: Role;
 }

@@ -1,18 +1,20 @@
-import { IsEmpty, IsNumber, IsString } from "class-validator";
+import { IsNotEmpty, IsNumber, IsString } from "class-validator";
 
 export class CreateUserDto {
 
     @IsNumber()
-    @IsEmpty()
+    @IsNotEmpty()
     idPerson: number
 
     @IsString()
-    @IsEmpty()
+    @IsNotEmpty()
     email: string
 
     @IsString()
-    @IsEmpty()
+    @IsNotEmpty()
     password : string
+
+    deletedAt?: Date;
 
 
 

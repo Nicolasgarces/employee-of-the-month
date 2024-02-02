@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, DeleteDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Person } from 'src/person/entities/person.entity';
 
 @Entity()
@@ -6,6 +6,10 @@ export class PersonPicture {
 
     @PrimaryGeneratedColumn()
     id: number
+
+    @Column({type: 'datetime', default: () =>
+    'CURRENT_TIMESTAMP'})
+    createdAt: Date;
 
     @Column()
     urlPicture: string
@@ -19,6 +23,9 @@ export class PersonPicture {
 
     @Column({default: true})
     state: boolean;
+
+    @DeleteDateColumn()
+    deletedAt: Date;
 
 }
 

@@ -1,10 +1,10 @@
 import { IsNotEmpty, IsString } from "class-validator";
 
-export class CreateAreaDto {
-    
+export class CreateDocumentTypeDto {
+
     @IsString()
     @IsNotEmpty()
     name: string
-
+    
     deletedAt?: Date;
 }

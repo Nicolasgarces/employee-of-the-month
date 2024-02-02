@@ -1,6 +1,6 @@
 import { Person } from "src/person/entities/person.entity";
 import { Vote } from "src/vote/entities/vote.entity";
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, DeleteDateColumn, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class VoteDescription {
@@ -10,6 +10,10 @@ export class VoteDescription {
 
     @Column()
     idVote: number
+
+    @Column({type: 'datetime', default: () =>
+    'CURRENT_TIMESTAMP'})
+    createdAt: Date;
 
     @ManyToOne(() => Vote, vote => vote.voteDescriptions)
     @JoinColumn({name : 'idVote'})
@@ -31,5 +35,8 @@ export class VoteDescription {
 
     @Column({default: true})
     state: boolean
+
+    @DeleteDateColumn()
+    deletedAt: Date;
 
 }

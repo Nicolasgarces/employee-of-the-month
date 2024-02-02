@@ -3,7 +3,7 @@ import { VoteDescriptionService } from './vote_description.service';
 import { CreateVoteDescriptionDto } from './dto/create-vote_description.dto';
 import { UpdateVoteDescriptionDto } from './dto/update-vote_description.dto';
 
-@Controller('vote-description')
+@Controller('vote_description')
 export class VoteDescriptionController {
   constructor(private readonly voteDescriptionService: VoteDescriptionService) {}
 

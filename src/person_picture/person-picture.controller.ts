@@ -3,13 +3,13 @@ import { PersonPictureService } from './person-picture.service';
 import { CreatePersonPictureDto } from './dto/create-person-picture.dto';
 import { UpdatePersonPictureDto } from './dto/update-person-picture.dto';
 
-@Controller('person-picture')
+@Controller('person_picture')
 export class PersonPictureController {
   constructor(private readonly personPictureService: PersonPictureService) {}
 
   @Post()
   create(@Body() createPersonPictureDto: CreatePersonPictureDto) {
-    return this.personPictureService.create(createPersonPictureDto);
+    return this.personPictureService.createPersonPicture(createPersonPictureDto);
   }
 
   @Get()
@@ -18,17 +18,17 @@ export class PersonPictureController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.personPictureService.findOne(+id);
+  findOne(@Param('id') id: number) {
+    return this.personPictureService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updatePersonPictureDto: UpdatePersonPictureDto) {
-    return this.personPictureService.update(+id, updatePersonPictureDto);
+  update(@Param('id') id: number, @Body() updatePersonPictureDto: UpdatePersonPictureDto) {
+    return this.personPictureService.update(id, updatePersonPictureDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.personPictureService.remove(+id);
+  remove(@Param('id') id: number) {
+    return this.personPictureService.remove(id);
   }
 }

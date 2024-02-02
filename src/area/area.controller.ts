@@ -9,7 +9,7 @@ export class AreaController {
 
   @Post()
   create(@Body() createAreaDto: CreateAreaDto) {
-    return this.areaService.create(createAreaDto);
+    return this.areaService.createArea(createAreaDto);
   }
 
   @Get()
@@ -18,17 +18,17 @@ export class AreaController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.areaService.findOne(+id);
+  findOne(@Param('id') id: number) {
+    return this.areaService.findOne(id);
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateAreaDto: UpdateAreaDto) {
-    return this.areaService.update(+id, updateAreaDto);
+  update(@Param('id') id: number, @Body() updateAreaDto: UpdateAreaDto) {
+    return this.areaService.update(id, updateAreaDto);
   }
 
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.areaService.remove(+id);
+  remove(@Param('id') id: number) {
+    return this.areaService.remove(id);
   }
 }

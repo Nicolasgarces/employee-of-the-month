@@ -1,15 +1,19 @@
 import { Area } from "src/area/entities/area.entity";
-import {DocumentType} from "src/document-type/entities/document-type.entity"
-import { PersonPicture } from "src/person-picture/entities/person-picture.entity";
+import {DocumentType} from "src/document_type/entities/document-type.entity"
+import { PersonPicture } from "src/person_picture/entities/person-picture.entity";
 import { User } from "src/user/entities/user.entity";
 import { VoteDescription } from "src/vote_description/entities/vote_description.entity";
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, DeleteDateColumn, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Person {
 
     @PrimaryGeneratedColumn()
     id: number
+
+    @Column({type: 'datetime', default: () =>
+    'CURRENT_TIMESTAMP'})
+    createdAt: Date;
 
     @Column()
     name: string
@@ -46,4 +50,6 @@ export class Person {
     @OneToMany(() => VoteDescription, voteDescription => voteDescription.votedPerson)
     votesDescriptionsVoteds: VoteDescription[];
 
+    @DeleteDateColumn()
+    deletedAt: Date;
 }

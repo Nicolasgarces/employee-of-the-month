@@ -1,17 +1,19 @@
-import { IsEmpty, IsNumber } from "class-validator";
+import { IsNotEmpty, IsNumber } from "class-validator";
 
 export class CreateVoteDescriptionDto {
 
     @IsNumber()
-    @IsEmpty()
+    @IsNotEmpty()
     idVote: number
 
     @IsNumber()
-    @IsEmpty()
+    @IsNotEmpty()
     idVoter: number
 
     @IsNumber()
-    @IsEmpty()
+    @IsNotEmpty()
     idVoted: number
+
+    deletedAt?: Date;
 
 }
