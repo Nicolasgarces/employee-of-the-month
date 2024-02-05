@@ -19,7 +19,7 @@ export class User {
     @JoinColumn({name: 'idPerson'})
     people: Person;
 
-    @Column()
+    @Column({unique: true})
     email: string
 
     @Column()
