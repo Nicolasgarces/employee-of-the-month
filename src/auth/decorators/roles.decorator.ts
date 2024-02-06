@@ -1,5 +1,5 @@
-import { SetMetadata } from "@nestjs/common";
+import { SetMetadata } from '@nestjs/common';
+import { idRole } from '../enums/rol.enums'
 
-export const Roles = (role) => SetMetadata('roles', 1)
-
-// minuto del video  34:39
+export const ROLES_KEY = 'roles';
+export const Roles = (...roles: idRole[]) => SetMetadata(ROLES_KEY, roles);

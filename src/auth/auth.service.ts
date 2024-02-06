@@ -14,21 +14,26 @@ export class AuthService {
   private jwtService: JwtService){}
   
   async register({idPerson, email, password, idRole}: RegisterDto) {
-
     const user = await this.userService.findOneByEmail(email)
+
     if (user) {
       throw new BadRequestException('User already exists')
     }
-    return await this.userService.createUser({
+    await this.userService.createUser({
       idPerson,
       email,
       idRole,
       password: await bcryptjs.hash(password, 10) //encripta la password
     });
+    return {
+      idPerson,
+      email,
+      idRole
+    }
   }
 
   async login({email, password,}: LoginDto) {
-    const user = await this.userService.findOneByEmail(email)
+    const user = await this.userService.findByEmailWithPassword(email)
     if(!user){
       throw new UnauthorizedException('Invalid Credencials');
     }
@@ -36,12 +41,14 @@ export class AuthService {
     if(!isPasswordvalid){
       throw new UnauthorizedException('Invalid Credencials');
     }
-    const payload = {email: user.email, idRole: user.idRole};
-
+    const payload = {idPerson: user.idPerson, email: user.email, idRole: user.idRole};
     const token = await this.jwtService.signAsync(payload)
     return {
       token,
       email,
           };
+  }
+  async profile({ email, idRole }: { email: string; idRole: number }) {
+    return await this.userService.findOneByEmail(email);
   }
 }

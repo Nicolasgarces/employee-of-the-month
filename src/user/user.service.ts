@@ -8,7 +8,6 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class UserService {
-
   constructor(
     @InjectRepository(User)
     private UserRepository : Repository<User>
@@ -22,6 +21,13 @@ export class UserService {
 
   findOneByEmail(email: string){
     return this.UserRepository.findOneBy({email})
+  }
+  
+  findByEmailWithPassword(email: string) {
+    return this.UserRepository.findOne({
+      where: { email },
+      select: ['id', 'idPerson', 'email', 'password', 'idRole'],
+    });
   }
 
   async findAll() {
